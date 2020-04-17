@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">Something</div>
+      <div class="col">{% include "servers.html" %}</div>
+      <div class="col">{% include "channels.html" %}</div>
+      <div class="col">{% block action %}{% endblock %}</div>
+      <div class="col">{% block people %}{% endblock %}</div>
+    </div>
+  </div>
+{% endblock %}

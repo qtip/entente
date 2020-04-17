@@ -1,0 +1,9 @@
+{% block channels %}
+    <ul>
+        {% for item in channels %}
+            <li>{{ item }}</li>
+        {% empty %}
+            <li>Sorry, no items in this list.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
