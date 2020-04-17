@@ -24,5 +24,5 @@ urlpatterns = [
     path("register/", register, name="register"),
     path('', include("django.contrib.auth.urls")),
     path("add_server/", add_server, name="add_server"),
-    path("", index_channel, name="index_channel"),
+    path("/<int:pk>/", index_channel, name="index_channel"),
 ]

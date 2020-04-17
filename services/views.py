@@ -48,7 +48,7 @@ def add_server(request):
 
 # -----------------CHANNELS-----------------
 
-# A view that returns all channels
+# A view that returns all channels of a certain server
 def index_channel(request, pk):
     # Conditions for object to retrieve
     channels = Channel.objects.filter(server_id=pk)

@@ -1,9 +1,7 @@
 {% block servers %}
 <ul>{{view_current}}
     {% for item in user.server.all %}
-        <li><form method="POST" action="2">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-success">{{ item }}</button></li>
+    <a href="{% url 'index_channel' item.server_id %}"><li>{{ item }}</li> </a>
     {% empty %}
         <li>Sorry, no items in this list.</li>
     {% endfor %}
