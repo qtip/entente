@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register.views import register
-from services.views import index, add_server, index_server, index_channel
+from services.views import add_server, index_server, index_channel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,6 @@ urlpatterns = [
     path("register/", register, name="register"),
     path('', include("django.contrib.auth.urls")),
     path("add_server/", add_server, name="add_server"),
-    path("/<int:pk>/", index_channel, name="index_channel"),
+    path("<int:pk>/", index_channel, name="index_channel"),
+    path("servers", index_server, name="index_server"),
 ]

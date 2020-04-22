@@ -17,7 +17,17 @@
 
 <body>
   <h1>Welcome, {{ request.user.username|default:"friend" }}. <a href="/logout/">Logout</a></h1>
-  {% block content %}{% endblock %}
+  {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">Something</div>
+      <div class="col">{% block servers %}{% endblock %}</div>
+      <div class="col">{% block channels %}{% endblock %}</div>
+      <div class="col">{% block action %}{% endblock %}</div>
+      <div class="col">{% block people %}{% endblock %}</div>
+    </div>
+  </div>
+{% endblock %}
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

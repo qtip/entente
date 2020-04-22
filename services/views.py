@@ -1,23 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Server, Channel
-from .forms import ServerForm
+from .forms import ServerForm, EmptyForm
 from django.contrib.auth.models import User
-
-
-# A view of the index page
-@login_required(login_url='/login/')
-def index(request):
-    return render(request, 'homepage.html', {})
-
 
 # -----------------SERVERS-----------------
 
 # A view that returns all servers
 def index_server(request):
-    servers = Server.objects.all()
+    servers = Server.objects.filter(owner=request.user)
+    if request.method == 'POST':
+        form = EmptyForm(request.POST)
+        print(servers, flush=True)
+        return redirect('index')
+    else:
+        form = EmptyForm()
     context = {
         "servers": servers,
+        'form': form,
     }
     return render(request, "servers.html", context)
 
@@ -26,6 +26,7 @@ def index_server(request):
 def add_server(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
+        print("Add server message", flush=True)
         # create a form instance and populate it with data from the request:
         form = ServerForm(request.POST)
         # check whether it's valid:

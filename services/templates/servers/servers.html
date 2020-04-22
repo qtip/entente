@@ -1,9 +1,10 @@
+{% extends "base.html" %}
 {% block servers %}
-<ul>{{view_current}}
-    {% for item in user.server.all %}
-    <a href="{% url 'index_channel' item.server_id %}"><li>{{ item }}</li> </a>
-    {% empty %}
-        <li>Sorry, no items in this list.</li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for item in server %}
+            <a href="{% url 'index_channel' item.server_id %}"><li>{{ item }}</li> </a>
+        {% empty %}
+            <li>Sorry, no items in this list.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
