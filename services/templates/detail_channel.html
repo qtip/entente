@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style type="text/css">
+  .active {
+      font-weight:bold;
+  }
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col">Something</div>
+      <div class="col">{% include 'servers.html' %}</div>
+      <div class="col">{% include 'channels.html' %}</div>
+      <div class="col">{% block action %}{% endblock %}</div>
+      <div class="col">{% block people %}{% endblock %}</div>
+      {% if active_channel.type == 'text' %}
+        <span>This is a text channel!</span>
+      {% elif active_channel.type == 'voice' %}
+        <span>Speak up, this is a voice channel!</span>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Server, Channel
 from .forms import ServerForm, EmptyForm
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # -----------------SERVERS-----------------
 
@@ -57,3 +58,20 @@ def index_channel(request, pk):
         "channels": channels,
     }
     return render(request, "channels.html", context)
+
+def detail_channel(request, server_pk, channel_pk):
+    active_server = Server.objects.get(pk=server_pk)
+    active_channel = Channel.objects.get(pk=channel_pk)
+    servers = Server.objects.filter(owner=request.user)
+    context = {
+        "servers": servers,
+        "active_server": active_server,
+        "active_channel": active_channel,
+        "channels": active_server.channel_set.all(),
+    }
+    return render(request, "detail_channel.html", context)
+
+def index_services(request):
+    active_server = Server.objects.filter(owner=request.user).first()
+    active_channel = active_server.channel_set.first()
+    return redirect(reverse('detail_channel', args=(active_server.pk, active_channel.pk)))

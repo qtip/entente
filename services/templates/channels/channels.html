@@ -1,8 +1,7 @@
-{% extends "base.html" %}
 {% block channels %}
     <ul>
-        {% for item in channels %}
-            <li>{{ item }}</li>
+        {% for channel in channels %}
+            <li><a href="{% url 'detail_channel' channel.server.pk channel.pk %}" class="{% if active_channel.pk == channel.pk %}active{% endif %}">{{ channel }}</a></li>
         {% empty %}
             <li>Sorry, no items in this list.</li>
         {% endfor %}

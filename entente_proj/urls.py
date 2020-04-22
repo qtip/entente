@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register.views import register
-from services.views import add_server, index_server, index_channel
+from services.views import add_server, index_server, index_channel, detail_channel, index_services
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls'), name="home"),
     path("register/", register, name="register"),
     path('', include("django.contrib.auth.urls")),
     path("add_server/", add_server, name="add_server"),
     path("<int:pk>/", index_channel, name="index_channel"),
     path("servers", index_server, name="index_server"),
+    path("", index_services, name="index_services"),
+    path("<int:server_pk>/<int:channel_pk>", detail_channel, name="detail_channel"),
 ]
